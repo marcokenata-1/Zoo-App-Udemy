@@ -32,7 +32,17 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    class AnimalAdapter : BaseAdapter {
+    fun delete(index: Int){
+        listOfAnimals.removeAt(index)
+        adapter!!.notifyDataSetChanged()
+    }
+
+    fun add(index: Int){
+        listOfAnimals.add(listOfAnimals[index])
+        adapter!!.notifyDataSetChanged()
+    }
+
+    inner class AnimalAdapter : BaseAdapter {
 
         var listOfAnimals = ArrayList<Animal>()
         var context: Context? = null
@@ -57,11 +67,12 @@ class MainActivity : AppCompatActivity() {
             myView.ivAnimalImage.setImageResource(animal.image!!)
 
             myView.ivAnimalImage.setOnClickListener{
-                val intent = Intent(context,AnimalInfo::class.java)
-                intent.putExtra("name",animal.name!!)
-                intent.putExtra("des",animal.des!!)
-                intent.putExtra("image",animal.image!!)
-                context!!.startActivity(intent)
+                add(position)
+//                val intent = Intent(context,AnimalInfo::class.java)
+//                intent.putExtra("name",animal.name!!)
+//                intent.putExtra("des",animal.des!!)
+//                intent.putExtra("image",animal.image!!)
+//                context!!.startActivity(intent)
 
             }
 
